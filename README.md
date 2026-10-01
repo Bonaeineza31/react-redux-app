@@ -1,75 +1,50 @@
-# React + TypeScript + Vite
+# React Redux App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A counter app built with React, TypeScript and Vite, using Redux for state management **without Redux Toolkit**.
 
-Currently, two official plugins are available:
+The full activity instructions are in [instructions.md](instructions.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Redux store created with `createStore` and the `redux-logger` middleware
+- Counter actions and action creators (`increment`, `decrement`, `reset`)
+- Counter reducer combined with `combineReducers`
+- App wrapped in the React-Redux `<Provider>`
+- `Counter` component that reads state with `useSelector` and updates it with `useDispatch`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Open http://localhost:5173 and use the +, - and Reset buttons. Open the browser console to see each action logged by `redux-logger`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
 ```
+src/
+├── components/
+│   ├── Counter.tsx
+│   └── Counter.module.css
+├── store/
+│   ├── actions/
+│   │   └── counterActions.ts
+│   ├── reducers/
+│   │   ├── counterReducer.ts
+│   │   └── index.ts
+│   └── store.ts
+├── App.tsx
+├── index.css
+└── main.tsx
+```
+
+## Scripts
+
+| Command           | Description                      |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Start the development server     |
+| `npm run build`   | Type-check and build for production |
+| `npm run lint`    | Run ESLint                       |
+| `npm run preview` | Preview the production build     |
